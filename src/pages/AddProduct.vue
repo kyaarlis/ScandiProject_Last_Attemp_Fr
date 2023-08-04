@@ -5,6 +5,7 @@
       <div>
         <label for="sku">SKU</label>
         <input type="text" id="sku" name="sku" required/>
+        <p class="message">{{ message }}</p>
       </div>
       <div>
         <label for="name">Name</label>
@@ -64,6 +65,7 @@ export default {
             furnitureVisibility: false,
             bookVisibility: false,
             selectedOption: '',
+            message: ''
         }
     },
     methods: {
@@ -86,6 +88,9 @@ export default {
     },
     created() {
       document.title = 'Add Product'
+
+      const urlParams = new URLSearchParams(window.location.search)
+      this.message = urlParams.get('message' || '')
     }
 }
 </script>
@@ -129,5 +134,9 @@ button:hover,
 button:active {
   background-color: #220031;
   border-color: #220031;
+}
+
+.message {
+  color: red;
 }
 </style>

@@ -2,6 +2,10 @@
 include "./db.php";
 include "./main_functions.php";
 
+header("Access-Control-Allow-Origin: *"); // allow cross-origin resource sharing (CORS)
+header("Access-Control-Allow-Headers: *"); // allow all headers to be sent in the request
+header("Access-Control-Allow-Methods: *"); // allow all HTTP methods to be used
+
 if (isset($_POST['submitForm'])) {
     $sku = $_POST['sku'];
     $productName = $_POST['productName'];
@@ -12,6 +16,8 @@ if (isset($_POST['submitForm'])) {
     $width = $_POST['width'];
     $length = $_POST['length'];
     $weight = $_POST['weight'];
+
+    check_for_duplicate($sku);
 
     if ($productType === 'DVD') {
 
@@ -33,5 +39,5 @@ if (isset($_POST['submitForm'])) {
 
     confirm_query($form_query);
 
-    header('Location: http://localhost:8080');
+    header('Location: http://localhost:8080/');
 }
