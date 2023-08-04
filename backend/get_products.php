@@ -2,11 +2,7 @@
 include "./db.php";
 include "./main_functions.php";
 
-// get_product('DVD');
-// get_product('Furniture');
-// get_product('Book');
-
-function get_product() {
+function get_products() {
     global $conn;
 
     header("Access-Control-Allow-Origin: *"); // allow cross-origin resource sharing (CORS)
@@ -25,4 +21,4 @@ function get_product() {
     echo json_encode($products);
 }
 
-get_product();
+get_products();
