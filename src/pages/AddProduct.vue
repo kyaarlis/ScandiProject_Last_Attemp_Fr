@@ -1,7 +1,9 @@
 <template>
   <section>
     <h2>Add products</h2>
-    <form action="http://localhost/ScandiProject_V2/backend/form.php" method="post">
+    <!-- http://localhost/ScandiProject_V2/backend/form.php -->
+    <!-- http://karlis-veckagans.atwebpages.com/backend/form.php -->
+    <form action="http://karlis-veckagans.atwebpages.com/backend/form.php" method="post">
       <div>
         <label for="sku">SKU</label>
         <input type="text" id="sku" name="sku" required/>
@@ -65,7 +67,7 @@ export default {
             furnitureVisibility: false,
             bookVisibility: false,
             selectedOption: '',
-            message: ''
+            message: '',
         }
     },
     methods: {

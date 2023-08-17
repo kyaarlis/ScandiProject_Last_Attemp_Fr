@@ -17,6 +17,13 @@ if (isset($_POST['submitForm'])) {
     $length = $_POST['length'];
     $weight = $_POST['weight'];
 
+    
+    $size = isset($_POST['size']) ? $_POST['size'] : null;
+	$height = isset($_POST['height']) ? $_POST['height'] : null;
+	$width = isset($_POST['width']) ? $_POST['width'] : null;
+	$length = isset($_POST['length']) ? $_POST['length'] : null;
+	$weight = isset($_POST['weight']) ? $_POST['weight'] : null;
+
     check_for_duplicate($sku);
 
     if ($productType === 'DVD') {

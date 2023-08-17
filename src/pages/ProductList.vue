@@ -1,6 +1,6 @@
 <template>
   <section>  
-    <form action="http://localhost/ScandiProject_V2/backend/delete_products.php" method="post">
+    <form action="http://karlis-veckagans.atwebpages.com/backend/delete_products.php" method="post">
       <div class="heading">
         <h2>Product List</h2>
         <button type="submit" class="btn btn-danger" id="delete-product-btn" name="delete_products">MASS DELETE</button>
@@ -31,9 +31,14 @@ document.title = 'Product List'
 const products = ref([])
 
 onMounted (() => {
-  axios.get('http://localhost/ScandiProject_V2/backend/get_products.php').then((res) => {
+  const dbUrl = 'http://karlis-veckagans.atwebpages.com/backend/get_products.php'
+  // const dbUrl = 'http://localhost/ScandiProject_V2/backend/get_products.php'
+
+  axios.get(dbUrl).then((res) => {
 
   const response = res.data
+
+  // console.log(response)
 
   products.value = response
   })
