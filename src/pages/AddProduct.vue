@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Add products</h2>
-    <form action="http://karlis-veckagans.atwebpages.com/backend/form.php" method="post">
+    <form action="http://karlis-veckagans.atwebpages.com/backend/form.php" method="post" id="product_form">
       <div>
         <label for="sku">SKU</label>
         <input type="text" id="sku" name="sku" required/>
@@ -32,8 +32,8 @@
 
       <div class="p-3">
         <div v-if="dvdVisibility">
-            <label for="dvd">Size (MB)</label>
-            <input type="number" class="form-control" id="dvd" name="size" :required=dvdVisibility>
+            <label for="size">Size (MB)</label>
+            <input type="number" class="form-control" id="size" name="size" :required=dvdVisibility>
         </div>
 
         <div v-if="furnitureVisibility">
@@ -48,8 +48,8 @@
         </div>
 
         <div id="Book" v-if="bookVisibility">
-            <label for="book">Weight (KG)</label>
-            <input type="number" class="form-control" id="book" name="weight" :required=bookVisibility>
+            <label for="weight">Weight (KG)</label>
+            <input type="number" class="form-control" id="weight" name="weight" :required=bookVisibility>
         </div>
       </div>
       <button type="submit" name="submitForm">Save</button>

@@ -2,16 +2,29 @@
   <header>
     <nav>
       <ul>
-        <li>
-          <router-link to="/">Cancel</router-link>
+        <li v-if="!isUserHome">
+            <router-link to="/">Cancel</router-link>
         </li>
-        <li>
-          <router-link to="/addproduct">ADD</router-link>
+        <li v-else-if="isUserHome">
+            <router-link to="/addproduct">ADD</router-link>
         </li>
       </ul>
     </nav>
   </header>
 </template>
+
+<script>
+export default {
+  computed: {
+    isUserHome() {
+      if (this.$route.path === '/') {
+        return true
+      }
+      return false
+    }
+  } 
+}
+</script>
 
 <style scoped>
 header {
@@ -51,4 +64,14 @@ a:active,
 a.router-link-active {
   color: #fca55e;
 }
+
+/* button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+} */
 </style>

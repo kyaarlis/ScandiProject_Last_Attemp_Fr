@@ -3,9 +3,11 @@
     <form action="http://karlis-veckagans.atwebpages.com/backend/delete_products.php" method="post">
       <div class="heading">
         <h2>Product List</h2>
+        <!-- <button @click="toAddProduct">ADD</button> -->
         <button type="submit" class="btn btn-danger" id="delete-product-btn" name="delete_products">MASS DELETE</button>
       </div>
         <div class="mt-3">
+          <!-- <h3 class="product-warn" v-if="products.length === 0">No products added yet..</h3> -->
           <ul class="product-grid">
             <li v-for="product in products" :key="product.id">
               <div class="checkbox-conatiner">
@@ -24,27 +26,53 @@
   </section>
 </template>
 
-<script setup>
-import { onMounted, ref } from 'vue';
-import axios from 'axios'
+<script>
+import { mapGetters } from 'vuex';
+document.title = 'Product List'
+export default {
+  computed: {
+    ...mapGetters(['products'])
+  },
+  methods: {
+    async getProducts() {
+      await this.$store.dispatch('fetchProducts')
+    }
+  },
+  created() {
+    this.getProducts()
+  }
+}
+</script>
+
+<!-- <script setup>
+import { onMounted, computed } from 'vue';
+import { mapGetters, useStore } from 'vuex'
+//import { useRouter } from 'vue-router'
+//import axios from 'axios'
+
+//const router = useRouter()
 
 document.title = 'Product List'
+const store = useStore() 
 
-const products = ref([])
+// const toAddProduct = () => {
+//   router.push('/addproduct')
+// }
+
+const products = computed(() => {
+  return mapGetters['products']
+})
+
+console.log(products.value)
+
+const getProducts = async () => {
+ await store.dispatch('fetchProducts')
+}
 
 onMounted (() => {
-  const dbUrl = 'http://karlis-veckagans.atwebpages.com/backend/get_products.php'
-
-  axios.get(dbUrl).then((res) => {
-
-  const response = res.data
-
-  // console.log(response)
-
-  products.value = response
-  })
+  getProducts()
 })
-</script>
+</script> -->
 
 <style scoped>
 section {
@@ -82,6 +110,10 @@ h3, h4 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 1rem;
+}
+
+.product-warn {
+  color: #570080;
 }
 
 .checkbox-conatiner {
