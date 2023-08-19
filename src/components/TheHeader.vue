@@ -3,10 +3,15 @@
     <nav>
       <ul>
         <li v-if="!isUserHome">
+          <button>
             <router-link to="/">Cancel</router-link>
+          </button>
+            
         </li>
         <li v-else-if="isUserHome">
+          <button>
             <router-link to="/addproduct">ADD</router-link>
+          </button>
         </li>
       </ul>
     </nav>
@@ -65,7 +70,7 @@ a.router-link-active {
   color: #fca55e;
 }
 
-/* button {
+button {
   background: none;
   border: none;
   padding: 0;
@@ -73,5 +78,5 @@ a.router-link-active {
   font: inherit;
   color: inherit;
   cursor: pointer;
-} */
+}
 </style>

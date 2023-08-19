@@ -4,8 +4,8 @@
     <form action="http://karlis-veckagans.atwebpages.com/backend/form.php" method="post" id="product_form">
       <div>
         <label for="sku">SKU</label>
-        <input type="text" id="sku" name="sku" required/>
-        <p class="message">{{ message }}</p>
+        <input type="text" id="sku" name="sku" v-model="sku" required/>
+        <p class="message" v-if="isSkuTaken">SKU <code>"{{ sku }}"</code> is allready taken, please choose a different SKU!</p>
       </div>
       <div>
         <label for="name">Name</label>
@@ -52,12 +52,14 @@
             <input type="number" class="form-control" id="weight" name="weight" :required=bookVisibility>
         </div>
       </div>
-      <button type="submit" name="submitForm">Save</button>
+      <button :disabled="isSkuTaken" type="submit" name="submitForm">Save</button>
     </form>
   </section>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
     data() {
         return {
@@ -66,7 +68,14 @@ export default {
             bookVisibility: false,
             selectedOption: '',
             message: '',
+            sku: ''
         }
+    },
+    computed: {
+      ...mapGetters(['products']),
+    isSkuTaken() {
+      return this.products.some(product => product.sku === this.sku)
+    }
     },
     methods: {
         resetValues() {
@@ -84,13 +93,15 @@ export default {
             } else if (this.selectedOption === 'Book') {
                 this.bookVisibility = true
             }
-        }
+        },
+        async getProducts() {
+          await this.$store.dispatch('fetchProducts')
+      }
     },
     created() {
       document.title = 'Add Product'
 
-      const urlParams = new URLSearchParams(window.location.search)
-      this.message = urlParams.get('message' || '')
+      this.getProducts()
     }
 }
 </script>

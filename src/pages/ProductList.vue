@@ -3,15 +3,22 @@
     <form action="http://karlis-veckagans.atwebpages.com/backend/delete_products.php" method="post">
       <div class="heading">
         <h2>Product List</h2>
-        <!-- <button @click="toAddProduct">ADD</button> -->
-        <button type="submit" class="btn btn-danger" id="delete-product-btn" name="delete_products">MASS DELETE</button>
+        <button :disabled="isProductChecked" type="submit" class="btn btn-danger" id="delete-product-btn" name="delete_products">MASS DELETE</button>
       </div>
         <div class="mt-3">
-          <!-- <h3 class="product-warn" v-if="products.length === 0">No products added yet..</h3> -->
+          <h3 class="product-warn" v-if="isProducts">No products added yet..</h3>
           <ul class="product-grid">
             <li v-for="product in products" :key="product.id">
               <div class="checkbox-conatiner">
-                  <input type="checkbox" class="delete-checkbox" name="delete[]" :value="product.sku">
+                  <input 
+                    type="checkbox" 
+                    class="delete-checkbox" 
+                    name="delete[]" 
+                    :value="product.sku"
+                    :id="`checkbox-${product.id}`"
+                    :checked="checkedProducts.includes(product.id)"
+                    @change="handleCheckboxChange(product.id)"
+                  />
               </div>
               <h3>{{ product.sku }}</h3>
               <h4>{{ product.name }}</h4>
@@ -28,51 +35,41 @@
 
 <script>
 import { mapGetters } from 'vuex';
-document.title = 'Product List'
+
 export default {
+  data() {
+    return {
+      isChecked: false,
+      checkedProducts: []
+    }
+  },
   computed: {
-    ...mapGetters(['products'])
+    ...mapGetters(['products']),
+    isProductChecked() {
+      return this.checkedProducts.length === 0
+    },
+    isProducts() {
+      return this.products.length === 0
+    }
   },
   methods: {
     async getProducts() {
       await this.$store.dispatch('fetchProducts')
+    },
+    handleCheckboxChange(productId) {
+      if (this.checkedProducts.includes(productId)) {
+        this.checkedProducts = this.checkedProducts.filter(id => id !== productId);
+      } else {
+        this.checkedProducts.push(productId);
+      }
     }
   },
   created() {
+    document.title = 'Product List'
     this.getProducts()
   }
 }
 </script>
-
-<!-- <script setup>
-import { onMounted, computed } from 'vue';
-import { mapGetters, useStore } from 'vuex'
-//import { useRouter } from 'vue-router'
-//import axios from 'axios'
-
-//const router = useRouter()
-
-document.title = 'Product List'
-const store = useStore() 
-
-// const toAddProduct = () => {
-//   router.push('/addproduct')
-// }
-
-const products = computed(() => {
-  return mapGetters['products']
-})
-
-console.log(products.value)
-
-const getProducts = async () => {
- await store.dispatch('fetchProducts')
-}
-
-onMounted (() => {
-  getProducts()
-})
-</script> -->
 
 <style scoped>
 section {
