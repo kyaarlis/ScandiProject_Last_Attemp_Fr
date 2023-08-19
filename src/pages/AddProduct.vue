@@ -1,8 +1,6 @@
 <template>
   <section>
     <h2>Add products</h2>
-    <!-- http://localhost/ScandiProject_V2/backend/form.php -->
-    <!-- http://karlis-veckagans.atwebpages.com/backend/form.php -->
     <form action="http://karlis-veckagans.atwebpages.com/backend/form.php" method="post">
       <div>
         <label for="sku">SKU</label>

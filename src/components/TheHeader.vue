@@ -12,51 +12,6 @@
     </nav>
   </header>
 </template>
-<script>
-// export default {
-//   data () {
-//     return {
-//       cancelButton: false,
-//       addButton: false
-//     }
-//   },
-//   mounted () {
-//     this.cancelButton = false
-//     this.addButton = false
-//     const currentRoute = this.$route.path
-
-//     if (currentRoute === '/') {
-//       this.addButton = true
-//     } else if (currentRoute === '/addproduct') {
-//       this.cancelButton = true
-//     }
-
-//     console.log('cancel button: ' + this.cancelButton)
-//     console.log('add button: ' + this.addButton)
-//   }
-// }
-</script>
-
-<!-- 
-<script setup>
-import { ref, onMounted } from 'vue';
-
-onMounted(() => {
-
-
-const cancelButton = ref(false)
-const addButton = ref(false)
-
-if (currentRoute.value === '/') {
-  addButton.value = true
-}
-
-if (currentRoute.value === '/addproduct') {
-  cancelButton.value = true
-}
-}) 
-
-</script> -->
 
 <style scoped>
 header {
