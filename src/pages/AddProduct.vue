@@ -54,7 +54,7 @@
             <input type="number" class="form-control" id="book" name="weight" :required=bookVisibility>
         </div>
       </div>
-      <button type="submit" name="submitForm">Add Product</button>
+      <button type="submit" name="submitForm">Save</button>
     </form>
   </section>
 </template>

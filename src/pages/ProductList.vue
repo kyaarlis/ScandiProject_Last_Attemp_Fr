@@ -5,19 +5,21 @@
         <h2>Product List</h2>
         <button type="submit" class="btn btn-danger" id="delete-product-btn" name="delete_products">MASS DELETE</button>
       </div>
-      <ul class="product-grid">
-        <li v-for="product in products" :key="product.id">
-          <div class="checkbox-conatiner">
-              <input type="checkbox" class="delete-checkbox" name="delete[]" :value="product.sku">
-          </div>
-          <h3>{{ product.sku }}</h3>
-          <h4>{{ product.name }}</h4>
-          <h4>{{ product.price }}.00$</h4>
-          <h4>{{ product.size ? 'Size: ' + product.size + ' MB' : null }}</h4>
-          <h4>{{ product.height ? 'Dimension: ' + product.height + 'x' + product.width + 'x' + product.length : null }}</h4>
-          <h4>{{ product.weight ? 'Weight: ' + product.weight + 'KG' : null }}</h4>
-        </li>
-      </ul>
+        <div class="mt-3">
+          <ul class="product-grid">
+            <li v-for="product in products" :key="product.id">
+              <div class="checkbox-conatiner">
+                  <input type="checkbox" class="delete-checkbox" name="delete[]" :value="product.sku">
+              </div>
+              <h3>{{ product.sku }}</h3>
+              <h4>{{ product.name }}</h4>
+              <h4>{{ product.price }}.00$</h4>
+              <h4>{{ product.size ? 'Size: ' + product.size + ' MB' : null }}</h4>
+              <h4>{{ product.height ? 'Dimension: ' + product.height + 'x' + product.width + 'x' + product.length : null }}</h4>
+              <h4>{{ product.weight ? 'Weight: ' + product.weight + 'KG' : null }}</h4>
+            </li>
+          </ul>
+        </div>
     </form>
   </section>
 </template>
@@ -32,7 +34,6 @@ const products = ref([])
 
 onMounted (() => {
   const dbUrl = 'http://karlis-veckagans.atwebpages.com/backend/get_products.php'
-  // const dbUrl = 'http://localhost/ScandiProject_V2/backend/get_products.php'
 
   axios.get(dbUrl).then((res) => {
 
