@@ -1,6 +1,5 @@
 <template>
   <section>  
-    <!-- http://localhost/ScandiProject_V2/backend/delete_products.php -->
     <form action="http://karlis-veckagans.atwebpages.com/backend/delete_products.php" method="post">
       <div class="heading">
         <h2>Product List</h2>
