@@ -6,7 +6,6 @@
           <button>
             <router-link to="/">Cancel</router-link>
           </button>
-            
         </li>
         <li v-else-if="isUserHome">
           <button>

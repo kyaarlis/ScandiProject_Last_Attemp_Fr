@@ -1,9 +1,10 @@
 <template>
   <section>  
+    <!-- http://localhost/ScandiProject_V2/backend/delete_products.php -->
     <form action="http://karlis-veckagans.atwebpages.com/backend/delete_products.php" method="post">
       <div class="heading">
         <h2>Product List</h2>
-        <button :disabled="isProductChecked" type="submit" class="btn btn-danger" id="delete-product-btn" name="delete_products">MASS DELETE</button>
+        <button type="submit" class="btn btn-danger" id="delete-product-btn" name="delete_products">MASS DELETE</button>
       </div>
         <div class="mt-3">
           <h3 class="product-warn" v-if="isProducts">No products added yet..</h3>
@@ -15,9 +16,6 @@
                     class="delete-checkbox" 
                     name="delete[]" 
                     :value="product.sku"
-                    :id="`checkbox-${product.id}`"
-                    :checked="checkedProducts.includes(product.id)"
-                    @change="handleCheckboxChange(product.id)"
                   />
               </div>
               <h3>{{ product.sku }}</h3>
@@ -39,15 +37,11 @@ import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
-      isChecked: false,
-      checkedProducts: []
+      isChecked: false
     }
   },
   computed: {
     ...mapGetters(['products']),
-    isProductChecked() {
-      return this.checkedProducts.length === 0
-    },
     isProducts() {
       return this.products.length === 0
     }
@@ -55,13 +49,6 @@ export default {
   methods: {
     async getProducts() {
       await this.$store.dispatch('fetchProducts')
-    },
-    handleCheckboxChange(productId) {
-      if (this.checkedProducts.includes(productId)) {
-        this.checkedProducts = this.checkedProducts.filter(id => id !== productId);
-      } else {
-        this.checkedProducts.push(productId);
-      }
     }
   },
   created() {
