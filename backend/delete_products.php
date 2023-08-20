@@ -13,8 +13,8 @@ if(isset($_POST["delete_products"])){
              $product_delete_query = mysqli_query($conn, $query);
     
              confirm_query($product_delete_query);
-         
-             header('Location: http://localhost:8080');
         }
     }
+    header('Location: http://localhost:8080');
 }
+

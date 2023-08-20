@@ -14,13 +14,13 @@ const store = createStore({
     },
     actions: {
         async fetchProducts(context) {
-            const dbUrl = 'http://karlis-veckagans.atwebpages.com/backend/get_products.php'
+            const dbUrl = 'http://localhost/ScandiProject_V2_dev/backend/get_products.php'
 
             await axios.get(dbUrl).then((res) => {
 
             const response = res.data
               
-            console.log(response)
+            //console.log(response)
             
             context.commit('fetchProducts', response)
             })

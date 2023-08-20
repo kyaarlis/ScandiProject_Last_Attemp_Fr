@@ -1,12 +1,12 @@
 <template>
   <section>  
-    <form action="http://karlis-veckagans.atwebpages.com/backend/delete_products.php" method="post">
+    <form action="http://localhost/ScandiProject_V2_dev/backend/delete_products.php" method="post">
       <div class="heading">
         <h2>Product List</h2>
         <button type="submit" class="btn btn-danger" id="delete-product-btn" name="delete_products">MASS DELETE</button>
       </div>
         <div class="mt-3">
-          <h3 class="product-warn" v-if="isProducts">No products added yet..</h3>
+          <h3 class="product-warn" v-if="noProducts">No products added yet..</h3>
           <ul class="product-grid">
             <li v-for="product in products" :key="product.id">
               <div class="checkbox-conatiner">
@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     ...mapGetters(['products']),
-    isProducts() {
+    noProducts() {
       return this.products.length === 0
     }
   },

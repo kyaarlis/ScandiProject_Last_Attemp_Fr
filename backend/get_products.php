@@ -15,6 +15,8 @@ function get_products() {
 
     confirm_query($product_query);
 
+    $products = [];
+
     while ($product = mysqli_fetch_assoc($product_query)) {
         $products[] = $product;  
     } 
