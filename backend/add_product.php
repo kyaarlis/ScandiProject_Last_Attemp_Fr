@@ -2,20 +2,18 @@
 include "./db.php";
 include "./main_functions.php";
 
-header("Access-Control-Allow-Origin: *"); // allow cross-origin resource sharing (CORS)
-header("Access-Control-Allow-Headers: *"); // allow all headers to be sent in the request
-header("Access-Control-Allow-Methods: *"); // allow all HTTP methods to be used
+allow_access_headers();
 
 abstract class Product {
     protected $sku;
     protected $productName;
     protected $productType;
     protected $price;
-
+                  
     public function setSku($sku) {
         $this->sku = $sku;
     }
-
+         
     public function setProductName($productName) {
         $this->productName = $productName;
     }
@@ -23,7 +21,7 @@ abstract class Product {
     public function setProductType($productType) {
         $this->productType = $productType;
     }
-
+         
     public function setPrice($price) {
         $this->price = $price;
     }
@@ -89,7 +87,7 @@ class BookProduct extends Product {
     }
 }
 
-class ProductFactoryMapping {
+class ProductTypeMapping {
     private static $productTypes = [
         'DVD' => 'DVDProduct',
         'Furniture' => 'FurnitureProduct',
@@ -109,7 +107,7 @@ if (isset($_POST['submitForm'])) {
     $productType = $_POST['productType'];
 
     // Get the class name from the factory mapping
-    $className = ProductFactoryMapping::getClass($productType);
+    $className = ProductTypeMapping::getClass($productType);
 
     // Create a product using reflection
     $product = new $className();
@@ -129,44 +127,3 @@ if (isset($_POST['submitForm'])) {
     // Redirect after saving
     header('Location: http://localhost:8080/');
 }
-
-// if (isset($_POST['submitForm'])) {
-//     $sku = $_POST['sku'];
-//     $productName = $_POST['productName'];
-//     $productType = $_POST['productType'];
-//     $price = $_POST['price'];
-//     $size = $_POST['size'];
-//     $height = $_POST['height'];
-//     $width = $_POST['width'];
-//     $length = $_POST['length'];
-//     $weight = $_POST['weight'];
-
-    
-//     $size = isset($_POST['size']) ? $_POST['size'] : null;
-// 	$height = isset($_POST['height']) ? $_POST['height'] : null;
-// 	$width = isset($_POST['width']) ? $_POST['width'] : null;
-// 	$length = isset($_POST['length']) ? $_POST['length'] : null;
-// 	$weight = isset($_POST['weight']) ? $_POST['weight'] : null;
-
-//     if ($productType === 'DVD') {
-
-//         $query = "INSERT INTO products (sku, name, price, productType, size) ";
-//         $query .= "VALUES ('{$sku}', '{$productName}', {$price}, '{$productType}', {$size})";
-        
-//     } else if ($productType === 'Furniture') {
-
-//         $query = "INSERT INTO products (sku, name, price, productType, height, width, length) ";
-//         $query .= "VALUES ('{$sku}', '{$productName}', {$price}, '{$productType}', {$height}, {$width}, {$length})";
-
-//     } else if ($productType === 'Book') {
-
-//         $query = "INSERT INTO products (sku, name, price, productType, weight) ";
-//         $query .= "VALUES ('{$sku}', '{$productName}', {$price}, '{$productType}', {$weight})";
-//     }
-  
-    // $form_query = mysqli_query($conn, $query);
-
-    // confirm_query($form_query);
-
-//     header('Location: http://localhost:8080/');
-// }

@@ -5,9 +5,7 @@ include "./main_functions.php";
 function get_products() {
     global $conn;
 
-    header("Access-Control-Allow-Origin: *"); // allow cross-origin resource sharing (CORS)
-    header("Access-Control-Allow-Headers: *"); // allow all headers to be sent in the request
-    header("Access-Control-Allow-Methods: *"); // allow all HTTP methods to be used
+    allow_access_headers();
 
     $query = "SELECT * FROM products ORDER BY id ASC";
         

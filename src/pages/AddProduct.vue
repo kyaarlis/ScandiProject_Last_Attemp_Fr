@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Add products</h2>
-    <form action="http://localhost/ScandiProject_V2_dev/backend/form.php" method="post" id="product_form">
+    <form action="http://localhost/ScandiProject_V2_dev/backend/add_product.php" method="post" id="product_form">
       <div>
         <label for="sku">SKU</label>
         <input type="text" id="sku" name="sku" v-model="sku" required/>
